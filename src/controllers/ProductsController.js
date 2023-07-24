@@ -45,10 +45,48 @@ function ProductsController() {
                 status: 400, 
                 message: "O produto já existe na base de dados!", 
                 path:`/produtos/${product.id}` ,
-                produto: product
+                action_links:[{
+                    view: `/produtos/${product.id}`,
+                    edit: `/produtos/${product.id}`,
+                    delete: `/produtos/${product.id}`
+                }],
+                data: product
             })
 
             return res.status(201).json({ status: 201, message: 'Produto cadastrado com sucesso!' })
+        },
+
+        async deleteProductById(req, res) {
+            const { productId: id } = req.params;
+
+            try {
+                
+                const product = await Products.findByPk(id)
+                
+                if(product) {
+                    await Products.destroy({ where: { id }}) 
+                    
+                    return res.status(200).json({ 
+                        status: 200,
+                        message: "Produto deletado com sucesso!",
+                        data: product
+                    })
+                } 
+
+                return res.status(404).json({ 
+                    status: 404,
+                    message: "Produto não encontrado na base de dados!"
+                })
+                
+
+            } catch(err) {
+                return res.status(400).json({
+                    status: 400, 
+                    error:'Bad Request', 
+                    message: err,
+                })
+            }
+
         }
     }
 }
