@@ -1,7 +1,10 @@
-const Produtos = require('../routes/Products')
+const Products = require('../routes/Products')
+const Users = require('../routes/Users')
 
 function initializeRoutes(app) {
-    app.use('/produtos', Produtos)
+    app.use('/produtos', Products)
+    app.use('/usuarios', Users)
+
 }
 
 module.exports = initializeRoutes;
