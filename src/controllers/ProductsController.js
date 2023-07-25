@@ -13,7 +13,7 @@ function ProductsController() {
 
             return res.status(200).json({
                 status: 200,
-                produtos: products
+                produtos: products                    
             })
         },
 
@@ -44,12 +44,7 @@ function ProductsController() {
             if(!created) return res.status(400).json({ 
                 status: 400, 
                 message: "O produto já existe na base de dados!", 
-                path:`/produtos/${product.id}` ,
-                action_links:[{
-                    view: `/produtos/${product.id}`,
-                    edit: `/produtos/${product.id}`,
-                    delete: `/produtos/${product.id}`
-                }],
+                path:`/produtos/${product.id}`,
                 data: product
             })
 
@@ -87,6 +82,30 @@ function ProductsController() {
                 })
             }
 
+        },
+
+        async updateProductById(req, res) {
+            const { productId: id } = req.params;
+            const { name, description, price } = req.body;
+
+            const payload = { name, description, price } 
+
+            const product = await Products.findByPk(id)
+
+            if(!product) {
+                return res.status(404).json({
+                    status: 404,
+                    message: 'Produto não encontrado na base de dados',
+                })
+            }
+
+            await Products.update(payload, { where: { id }})
+
+            return res.status(200).json({
+                status: 200,
+                message: 'Produto atualizado com sucesso',
+                data: product
+            })
         }
     }
 }
