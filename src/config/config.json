@@ -2,7 +2,7 @@
   "development": {
     "username": "admin",
     "password": "Dev@312H",
-    "database": "apiusuariosdb",
+    "database": "apiprodutosdb",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
