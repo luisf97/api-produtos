@@ -7,7 +7,7 @@ function UsersController() {
         async getAllUsers(req, res) {
 
             try {
-                const users = await Users.findAll()
+                const users = await Users.findAll({ attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt'] } })
 
                 if(!users.length) return res.status(404).json({ status: 404, message: 'Nenhum usuário encontrado!' })
 
