@@ -3,9 +3,22 @@ const app = express()
 const Router = require('./src/config/app')
 const morgan = require('morgan')
 const connection = require('./src/database/connection')
+const session = require('express-session')
+const cors = require('cors')
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(cors())
+
+app.use(session({
+    secret: '2C44-4D44-WppQ38S',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        maxAge: 3000
+    }
+}));
 
 Router(app)
 

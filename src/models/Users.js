@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Users',
-    paranoid: true,
-    defaultScope: {
-      attributes: {
-        exclude: ['password']
-      }
-    }
+    paranoid: true
+    // defaultScope: {
+    //   attributes: {
+    //     exclude: ['password']
+    //   }
+    // }
   });
   return Users;
 };
