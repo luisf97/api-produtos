@@ -1,5 +1,5 @@
 const { Products } = require('../models')
-
+const uuid = require('uuid')
 function ProductsController() {
     return {
 
@@ -88,7 +88,7 @@ function ProductsController() {
             const { productId: id } = req.params;
             const { name, description, price } = req.body;
 
-            const payload = { name, description, price } 
+            const payload = { id: uuid.v4(), name, description, price } 
 
             const product = await Products.findByPk(id)
 

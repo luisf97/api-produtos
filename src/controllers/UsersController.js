@@ -1,5 +1,6 @@
 const { Users } = require('../models/index')
 const bcrypt = require('bcrypt')
+const uuid = require('uuid')
 
 function UsersController() {
     return {
@@ -37,7 +38,7 @@ function UsersController() {
             try {
                 const [ user, created ] = await Users.findOrCreate({
                     where: { email },
-                    defaults: { name, email, password: hash },
+                    defaults: { id: uuid.v4(), name, email, password: hash },
                     attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt']}
                 })
     
