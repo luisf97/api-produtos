@@ -1,5 +1,5 @@
 const { Permissions } = require('../models/index')
-
+const uuid = require('uuid')
 function PermissionsController() {
     return {
 
@@ -47,7 +47,7 @@ function PermissionsController() {
                 data: permission
             })
 
-            return res.status(201).json({ status: 201, message: 'Regra cadastrada com sucesso!' })
+            return res.status(201).json({ status: 201, message: 'Permissão cadastrada com sucesso!' })
         },
 
         async deletePermissionById(req, res) {
