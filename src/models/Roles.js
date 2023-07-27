@@ -14,11 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Roles.init({
-    nome: DataTypes.STRING,
-    descricao: DataTypes.STRING
+    name: DataTypes.STRING,
+    description: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Roles',
+    paranoid: true
   });
   return Roles;
 };

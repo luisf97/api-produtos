@@ -1,4 +1,5 @@
 const { Roles } = require('../models/index')
+const uuid = require('uuid')
 
 function RolesController() {
     return {
@@ -36,7 +37,7 @@ function RolesController() {
 
             const [ role, created ] = await Roles.findOrCreate({
                 where: { name },
-                defaults: { name, description },
+                defaults: { id: uuid.v4(), name, description },
                 attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt']}
             })
 

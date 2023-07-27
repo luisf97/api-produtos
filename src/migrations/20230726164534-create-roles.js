@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUID
       },
-      nome: {
+      name: {
         type: Sequelize.STRING
       },
-      descricao: {
+      description: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -24,7 +24,6 @@ module.exports = {
         type: Sequelize.DATE
       },
       deletedAt: {
-        allowNull: false,
         type: Sequelize.DATE
       },
     });

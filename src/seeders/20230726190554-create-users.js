@@ -9,7 +9,7 @@ module.exports = {
         id: uuid.v4(),
         name: 'Luis Fernando',
         email: "luis@gmail.com",
-        password: 2999,
+        password: "101010",
         createdAt: new Date(),
         updatedAt: new Date(),
         deletedAt: null
@@ -18,7 +18,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-
     await queryInterface.bulkDelete('Users', null, {});
   }
 };
