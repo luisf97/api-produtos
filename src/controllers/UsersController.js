@@ -1,4 +1,4 @@
-const { Users } = require('../models/index')
+const { Users, Roles, Permissions } = require('../models/index')
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 
@@ -27,6 +27,29 @@ function UsersController() {
             if(!user) return res.status(404).json({ status: 404, message: 'Usuário não encontrado na base de dados'})
 
             return res.status(200).json({ status: 200, produto: user, path: req.originalUrl })
+        },
+
+        async getUserWithPermissions(req, res) {
+            const { id } = req.params
+
+            
+            const usuario = await Users.findOne({
+                include: [
+                    {
+                        model: Roles,
+                        as: 'users_roles',
+                        attributes: ['id', 'name', 'description']
+                    },
+                    {
+                        model: Permissions,
+                        as: 'users_permissions',
+                        attributes: ['id', 'name', 'description']
+                    }
+                ],
+                where: { id }
+            })
+
+            return res.json(usuario)
         },
 
         async createNewUser(req, res) {
